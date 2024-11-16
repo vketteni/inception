@@ -1,0 +1,3 @@
+sudo docker run --network inception_network --name mariadb --env-file mariadb/.env --mount source=mariadb_data,target=/var/lib/mysql mariadb 
+sudo docker run --network inception_network -p 80:80 --mount type=bind,source=/home/vketteni/inception/nginx/conf.d/,target=/etc/nginx/conf.d --mount source=wordpress_data,target=/var/www/html nginx 
+sudo docker run --network inception_network -p 9000:9000 --env-file wordpress/.env --mount source=wordpress_data,target=/var/www/html wordpress

@@ -1,27 +1,28 @@
 FROM alpine:3.19
 
-# Environment variables for MariaDB version and other configurations
-ENV MARIADB_VERSION=10.6
-
-# Install MariaDB and its prerequisites
+# Install MariaDB and prerequisites
 RUN set -x \
     && apk add --no-cache \
-        mariadb=10.11.6-r0 \
-        mariadb-client=10.11.6-r0 \
-        mariadb-server-utils=10.11.6-r0 \
-        openssl \
+        mariadb \
+        mariadb-client \
+        mariadb-server-utils \
         bash \
         curl \
         ca-certificates \
     && mkdir -p /var/lib/mysql /run/mysqld \
     && chown -R mysql:mysql /var/lib/mysql /run/mysqld
 
-ARG MYSQL_ROOT_PASSWORD
-ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+# Add custom entrypoint script
+COPY init-mariadb.sh /usr/local/bin/init-mariadb.sh
+RUN chmod +x /usr/local/bin/init-mariadb.sh
 
-# Expose MariaDB default port
+# Configure MariaDB to listen on all interfaces
+RUN echo -e "[mysqld]\nbind-address=0.0.0.0\n" > /etc/my.cnf.d/bind-address.cnf
+RUN echo -e "[mysqld]\nbind-address=0.0.0.0" > /etc/my.cnf
+RUN echo -e "port=3306\n" >> /etc/my.cnf
+
+# Expose MariaDB port
 EXPOSE 3306
 
-# Command to initialize MariaDB data directory and start the server
-CMD ["sh", "-c", "mariadb-install-db --user=mysql --datadir=/var/lib/mysql && exec mysqld --user=mysql --datadir=/var/lib/mysql"]
-
+# Use custom entrypoint
+ENTRYPOINT ["/usr/local/bin/init-mariadb.sh"]

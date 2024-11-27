@@ -36,6 +36,7 @@ RUN curl -fSL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz -o nginx.t
     && make \
     && make install
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 RUN mkdir -p /var/cache/nginx/client_temp

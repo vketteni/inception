@@ -1,0 +1,39 @@
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] Deleted Containers:
+e6458160177a9ccb157eb58010402477dabbc3161bc796421380ef74d2fe55e1
+c840cfd35233d422f7dd7058256dd4c49d08e990cc921789ad946b72ba477430
+aef5a349dc1a428092c96db0e385b505e1504fff733a404e9714fdd465e236a9
+
+Total reclaimed space: 14.74kB
+mysql.user table already exists!
+Run mysql_upgrade, not mysql_install_db
+2024-11-18 16:40:20 0 [Note] Starting MariaDB 10.11.6-MariaDB source revision fecd78b83785d5ae96f2c6ff340375be803cd299 as process 1
+2024-11-18 16:40:20 0 [Note] InnoDB: Compressed tables use zlib 1.3.1
+2024-11-18 16:40:20 0 [Note] InnoDB: Number of transaction pools: 1
+2024-11-18 16:40:20 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+2024-11-18 16:40:20 0 [Note] mysqld: O_TMPFILE is not supported on /var/tmp (disabling future attempts)
+2024-11-18 16:40:20 0 [Note] InnoDB: Using Linux native AIO
+2024-11-18 16:40:20 0 [Note] InnoDB: Initializing buffer pool, total size = 128.000MiB, chunk size = 2.000MiB
+2024-11-18 16:40:20 0 [Note] InnoDB: Completed initialization of buffer pool
+[18-Nov-2024 16:40:20] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[18-Nov-2024 16:40:20] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root
+2024-11-18 16:40:20 0 [Note] InnoDB: File system buffers for log disabled (block size=512 bytes)
+2024-11-18 16:40:20 0 [Note] InnoDB: End of log at LSN=46980
+2024-11-18 16:40:20 0 [Note] InnoDB: 128 rollback segments are active.
+2024-11-18 16:40:20 0 [Note] InnoDB: Setting file './ibtmp1' size to 12.000MiB. Physically writing the file full; Please wait ...
+2024-11-18 16:40:20 0 [Note] InnoDB: File './ibtmp1' size is now 12.000MiB.
+2024-11-18 16:40:20 0 [Note] InnoDB: log sequence number 46980; transaction id 14
+2024-11-18 16:40:20 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2024-11-18 16:40:20 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-11-18 16:40:20 0 [Note] InnoDB: Buffer pool(s) load completed at 241118 16:40:20
+2024-11-18 16:40:20 0 [Note] mysqld: ready for connections.
+Version: '10.11.6-MariaDB'  socket: '/run/mysqld/mysqld.sock'  port: 0  Alpine Linux
+2024-11-18 16:49:27 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2024-11-18 16:49:27 0 [Note] InnoDB: FTS optimize thread exiting.
+2024-11-18 16:49:27 0 [Note] InnoDB: Starting shutdown...
+2024-11-18 16:49:27 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2024-11-18 16:49:27 0 [Note] InnoDB: Buffer pool(s) dump completed at 241118 16:49:27
+2024-11-18 16:49:27 0 [Note] InnoDB: Removed temporary tablespace data file: "./ibtmp1"
+2024-11-18 16:49:27 0 [Note] InnoDB: Shutdown completed; log sequence number 46980; transaction id 15
+2024-11-18 16:49:27 0 [Note] mysqld: Shutdown complete
+

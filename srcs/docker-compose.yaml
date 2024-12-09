@@ -1,0 +1,67 @@
+services:
+  mariadb:
+    build:
+      context: ./mariadb
+      dockerfile: Dockerfile
+    container_name: mariadb
+    networks:
+      - inception_network
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    env_file:
+      - ./mariadb/.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent", "--user=root", "--password=${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  wordpress:
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
+    container_name: wordpress
+    networks:
+      - inception_network
+    volumes:
+          - wordpress_data:/var/www/html
+    env_file:
+      - ./wordpress/.env
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mariadb
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    networks:
+      - inception_network
+    volumes:
+      - /home/vketteni/data/nginx/conf.d:/etc/nginx/conf.d
+      - /home/vketteni/data/nginx/ssl:/etc/nginx/ssl
+      - wordpress_data:/var/www/html
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+
+networks:
+  inception_network:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/vketteni/data/mariadb
+      o: bind
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/vketteni/data/wordpress
+      o: bind
